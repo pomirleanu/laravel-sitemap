@@ -1,15 +1,15 @@
 {
-    "name": "roumen/sitemap",
+    "name": "pomirleanu/sitemap",
     "description": "A simple sitemap generator for Laravel.",
-    "homepage": "https://roumen.it/projects/laravel-sitemap",
+    "homepage": "https://printreblocuri.ro",
     "keywords": ["laravel", "sitemap", "generator"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Roumen Damianoff",
-            "email": "roumen@dawebs.com",
+            "name": "Pomirleanu Florentin-Cristinel",
+            "email": "pomirleanu.florentin@gmail.com",
             "role": "Developer",
-            "homepage": "https://roumen.it"
+            "homepage": "https://printreblocuri.ro"
         }
     ],
     "require": {
