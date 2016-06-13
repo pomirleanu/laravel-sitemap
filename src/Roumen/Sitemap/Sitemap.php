@@ -9,7 +9,6 @@
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
@@ -405,7 +404,7 @@ class Sitemap
         // must return something
         if (File::put($file, $data['content'])) {
             if ($gzip) {
-                gzencode(file_get_contents($file));
+                $this->gzCompressFile($file);
                 return "Success! Your sitemap file is created and archived.";
             }
             return "Success! Your sitemap file is created.";
@@ -420,6 +419,36 @@ class Sitemap
         } else {
             $this->model->resetItems();
         }
+    }
+
+    /**
+     * Gzip the given file.
+     * 
+     * @param $source
+     * @param int $level
+     * @return bool|string
+     */
+    private function gzCompressFile($source, $level = 9)
+    {
+        $dest = $source . '.gz';
+        $mode = 'wb' . $level;
+        $error = false;
+        if ($fp_out = gzopen($dest, $mode)) {
+            if ($fp_in = fopen($source, 'rb')) {
+                while (!feof($fp_in))
+                    gzwrite($fp_out, fread($fp_in, 1024 * 512));
+                fclose($fp_in);
+            } else {
+                $error = true;
+            }
+            gzclose($fp_out);
+        } else {
+            $error = true;
+        }
+        if ($error)
+            return false;
+        else
+            return $dest;
     }
 
 }
