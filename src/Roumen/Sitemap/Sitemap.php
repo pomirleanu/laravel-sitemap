@@ -423,7 +423,7 @@ class Sitemap
 
     /**
      * Gzip the given file.
-     * 
+     *
      * @param $source
      * @param int $level
      * @return bool|string
@@ -448,7 +448,8 @@ class Sitemap
         if ($error)
             return false;
         else
-            return $dest;
+            unlink($source);
+        return $dest;
     }
 
 }
